@@ -62,6 +62,9 @@ $ nextflow run tron-bioinformatics/tronflow-copy-number-calling -r <RELEASE|BRAN
 Option 2: Download the project and run it as follows...
 
 ```bash
+
+git clone --recurse-submodules git@github.com:TRON-Bioinformatics/tronflow-copy-number-calling.git
+
 $ nextflow run main.nf -profile conda --input_files <YOUR_INPUT_FILE> --reference <YOUR_REFERENCE_FASTA> --intervals <YOUR_TARGET_REGIONS_BED> --tools cnvkit,sequenza
 ```
 
@@ -87,13 +90,13 @@ Input:
     Example input file:
     name1	tumor_bam1	normal_bam1
     name2	tumor_bam2	normal_bam2
-    * reference: path to the FASTA genome reference
+    * reference: path to the FASTA genome reference. If sequenza is included, this file must not contain any alternative chromosomes and must be sorted in the same order as the bam file. 
     * intervals: path to the BED file with the targeted region
     * tools: tools to perform CN calling with (single and multiple entries possible, use ',' as delimiter) [ cnvkit, sequenza ]
 
 Optional input:
     * output: the folder where to publish output (default: output)
-    * VROOM_CONNECTION_SIZE: value for the environment variable VROOM_CONNECTION_SIZE which sometimes causes trouble with sequenza (default: 500000000)
+    * VROOM_CONNECTION_SIZE: value for the environment variable VROOM_CONNECTION_SIZE which sometimes causes trouble with sequenza and may need to be increased (default: 500000000)
     * cpus: the number of CPUs used by each job (default: 1)
     * memory: the amount of memory used by each job (default: 4g)
 

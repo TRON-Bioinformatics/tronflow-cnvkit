@@ -36,7 +36,8 @@ nextflow run main.nf \
 	--output ${output} \
 	--reference ${reference} \
 	--intervals ${intervals} \
-	--tools ${tool}
+	--tools ${tool} \
+	--VROOM_CONNECTION_SIZE 1536870912
 
 if [ $? -eq 1 ]
 then
