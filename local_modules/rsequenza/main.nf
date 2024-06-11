@@ -2,7 +2,7 @@ process R_SEQUENZA {
     tag "$meta.id"
     label 'process_medium'
 
-    conda (params.enable_conda ? "conda-forge::r-base=4.2.2 bioconda::r-sequenza=3.0.0" : null)
+    conda (params.enable_conda ? "conda-forge::r-base=4.2.2 bioconda::r-sequenza=3.0.0 conda-forge::r-iotools=0.3-2 " : null)
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/r-sequenza:3.0.0--r42h3342da4_5' :
         'biocontainers/r-sequenza:3.0.0--r42h3342da4_5' }"
@@ -23,7 +23,7 @@ process R_SEQUENZA {
 
     library(sequenza)
 
-    Sys.setenv(VROOM_CONNECTION_SIZE = "131072000")
+    Sys.setenv(VROOM_CONNECTION_SIZE = "${params.VROOM_CONNECTION_SIZE}")
 
     seqz <- sequenza.extract(file="${seqz}", verbose = FALSE)
     #data.file <-  system.file("extdata", "example.seqz.txt.gz", package = "sequenza")
